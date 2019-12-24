@@ -1,9 +1,10 @@
-import numpy as np
+import os
 import re
+
+import numpy as np
 import torch
 from torch.autograd import Variable
 
-import os
 LTP_DIR = 'D:\Python-dev\ltp_data_v3.4.0'
 cws_model_path = os.path.join(LTP_DIR, 'cws.model') # 分词模型路径
 pos_model_path = os.path.join(LTP_DIR, 'pos.model')  # 词性标注模型路径，模型名称为`pos.model`

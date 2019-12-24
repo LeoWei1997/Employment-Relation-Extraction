@@ -2,9 +2,9 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
 import torch.utils.data as D
 from torch.autograd import Variable
+
 from BiLSTM_ATT import BiLSTM_ATT
 
 EMB_DIM=100  # 词向量维度

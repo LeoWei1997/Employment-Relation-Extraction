@@ -2,9 +2,9 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
 import torch.utils.data as D
 from torch.autograd import Variable
+
 from BiLSTM_ATT import BiLSTM_ATT
 
 EMB_DIM=100  # 词向量维度
@@ -128,7 +128,6 @@ t_relas = torch.LongTensor(t_relas[:t_keep])
 test_datasets = D.TensorDataset(test,t_pos1,t_pos2,t_relas)
 test_dataloader = D.DataLoader(test_datasets,BATCH,True)  # ,num_workers=2
 
-import re
 for epoch in range(EPOCHS):
 
     # inputinfo=open('./datatonet/inputinfo.txt','w',encoding='utf-8')

@@ -1,8 +1,7 @@
-import torch
-import re
-import BiLSTM_ATT
-from torch.autograd import Variable
 import numpy as np
+import torch
+from torch.autograd import Variable
+
 # checkpoint=torch.load("./model/model_01.pkl")
 # model = BiLSTM_ATT()  # 传入结构配置和词典
 # model.load_state_dict()
