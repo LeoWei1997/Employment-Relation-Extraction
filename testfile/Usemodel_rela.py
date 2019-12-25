@@ -18,7 +18,7 @@ ner_model_path = os.path.join(LTP_DIR, 'ner.model')  # 词性标注模型路径�
 THRESHOLD = 0.5
 
 segmentor = Segmentor()  # 初始化
-segmentor.load_with_lexicon(cws_model_path, 'NE.txt')  # 辅助分词
+segmentor.load_with_lexicon(cws_model_path, '../NE.txt')  # 辅助分词
 
 postagger = Postagger()  # 初始化实例
 postagger.load(pos_model_path)  # 加载模型
@@ -62,9 +62,9 @@ def getpos(sent50, nrt):
     except:
         print('can not getpos: ', sent50)  # 如果报错去修改LabeledData.txt!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         print(nrt)
+        return -1
     pos = [i - nrtidx + 49 for i in range(50)]
     return pos
-
 
 # 清洗
 def cleanSent(sent):
@@ -106,7 +106,6 @@ def getSentEncodeIdx(sent):
 xml_to_txt.xtt()
 print('x2t end')
 model = torch.load('../model/model_epoch20.pkl')
-# model=torch.load('../model/model_过拟合.pt')
 infile = open("task1_input.txt", "r", encoding='utf-8')
 outfile = open("task1_input.rela", "w", encoding='utf-8')
 model.eval()
@@ -194,6 +193,8 @@ while True:
             sentencode = getSentEncodeIdx(sent50)
             batch_sentencode = Variable(torch.tensor(sentencode).repeat(128, 1))  # 我是一条一条输入，只好扩充成一批
             # print('sent len: ',batch_sentencode.shape)
+            if hpos==-1 or ipos==-1:
+                continue
             batch_hpos = Variable(torch.tensor(hpos).repeat(128, 1))
             batch_ipos = Variable(torch.tensor(ipos).repeat(128, 1))
             # print('pos len:',batch_hpos.shape)
@@ -222,7 +223,7 @@ while True:
                     answersheet[peopos][1] = orgpos
 
     for i in range(0, 100):
-        if answersheet[i][1] != -1 and answersheet[i][0] > THRESHOLD:
+        if answersheet[i][1] != -1 and answersheet[i][0] >= THRESHOLD:
             outfile.write(sent50[answersheet[i][1]] + "\n")
             outfile.write(sent50[i] + "\n")
     outfile.write(str(weibonum) + "\n")

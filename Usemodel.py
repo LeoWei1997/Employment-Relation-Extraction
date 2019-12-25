@@ -16,7 +16,8 @@ ner_model_path = os.path.join(LTP_DIR, 'ner.model')  # 词性标注模型路径�
 THRESHOLD = 0.5
 
 segmentor = Segmentor()  # 初始化
-segmentor.load_with_lexicon(cws_model_path, 'NE.txt')  # 辅助分词
+# segmentor.load_with_lexicon(cws_model_path, 'NE.txt')  # 辅助分词
+segmentor.load(cws_model_path)
 
 postagger = Postagger()  # 初始化实例
 postagger.load(pos_model_path)  # 加载模型
@@ -101,8 +102,8 @@ def getSentEncodeIdx(sent):
     return sentencode
 
 
-# model=torch.load('./model/model_epoch20.pkl')
-model = torch.load('./model/model_过拟合.pt')
+model=torch.load('./model/model_epoch20.pkl')
+# model = torch.load('./model/model_过拟合.pt')
 model.eval()
 while True:
     ni = []  # 组织
