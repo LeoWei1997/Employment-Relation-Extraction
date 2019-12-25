@@ -26,7 +26,7 @@ postagger.load(pos_model_path)  # 加载模型
 recognizer = NamedEntityRecognizer()
 recognizer.load(ner_model_path)
 
-kickout = re.compile('([０-９]*日)|([０-９]*[年日月时分])|[０-９0-9，、。（）〈〉‘’“”：∶；！?？％《》『』{}●/／nrtsz\n×’．…了]')
+kickout = re.compile('([０-９]*日)|([０-９]*[年日月时分])|[０-９0-9，、。（）【】〈〉‘’“”：∶；！?？％《》『』{}●/／nrtsz\n×’．…了]')
 
 trainword = []
 news = open('../datatonet/pre_sent50.txt', 'r', encoding='utf-8').readlines()
